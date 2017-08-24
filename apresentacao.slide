@@ -130,3 +130,37 @@ Isso mesmo, nada de lixo de memória!
 - Use o seguinte comando para testar o seu código:
     go run exercises/add_slices.go
 
+* Solução
+.background imgs/bg.png
+.play exercises/add_slices_solution.go /START OMIT/,/END OMIT/
+
+
+
+* O servidor web mais fácil que vocês já viram
+.background imgs/bg.png
+.play samples/webserver.go /START OMIT/,/END OMIT/
+Aperte Run e clique
+.link http://127.0.0.1:50000 Aqui
+
+
+* Goroutines
+.background imgs/bg.png
+
+* Goroutines
+.background imgs/bg.png
+- São o modelo de concorrência/paralelismo do Go;
+- Ótima sintaxe
+    go minhaFuncao()
+
+* Goroutines
+.background imgs/bg.png
+.play samples/goroutines.go /START OMIT/,/END OMIT/
+
+* Channels 
+.background imgs/bg.png
+- Channels são canais seguros de comunicação entre goroutines
+- Quando uma goroutine escreve em um channel, ela para até ele seja lido*
+
+* Channels
+.background imgs/bg.png
+.play samples/channels.go /START OMIT/,/END OMIT/

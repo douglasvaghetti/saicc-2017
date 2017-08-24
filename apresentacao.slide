@@ -1,0 +1,111 @@
+Go
+Uma introdução rápida
+15:04 29 Aug 2017
+Tags: foo, bar, baz
+
+Douglas Silva Vaghetti
+Software Engineer, DevOpers Cloud Solutions
+douglas@devopers.com.br
+https://devopers.com.br/
+
+
+* Sobre mim
+- Engenharia de Computação - FURG
+- DevOpers Cloud Solutions - Junho/2015 - Hoje
+- Usando Go - 1 ano e meio
+- Desenvolvimento de jogos - Romance mal resolvido
+
+
+
+* Uma breve história do Go
+- 2007 - Início do desenvolvimento dentro do Google
+- 2009 - Beta público
+- 2012 - Go 1.0
+- Hoje - Go 1.8
+
+
+
+* Uma noção de escala:
+
+.image imgs/go-vs-perl.png _ 1000
+
+
+* Uma noção de escala:
+
+.image imgs/go-vs-js.png _ 1000
+
+
+* Quais os objetivos da linguagem?
+- *Paralelismo* - Todos cores trabalhando
+- *Familiar* - Novos contribuidores devem se adaptar rápido
+- *Cooperação* - Go deve funcionar bem com muitos desenvolvedores
+- *Desempenho* - Go deve ser 
+
+
+
+* Finalmente, Go:
+- *Compilado;*
+- *Fortemente* *tipado;*
+- *Garbage* *collector;*
+- *Multiplataforma.*
+
+
+
+
+* Um tour pela linguagem
+
+* Um tour pela linguagem - Hello world
+.play samples/hello_world.go
+
+* Um tour pela linguagem - Variáveis
+.play samples/variables.go
+
+* Um tour pela linguagem - If
+.play samples/if.go
+
+* Um tour pela linguagem - For
+.play samples/for.go
+
+* Um tour pela linguagem - For (de novo)
+.play samples/for_again.go
+
+* Um tour pela linguagem - For(ever)
+.play samples/forever.go
+
+* Um tour pela linguagem - Funções
+.play samples/functions.go
+
+* Um tour pela linguagem - Funções 2
+.play samples/functions_multiple_returns.go
+
+* Um tour pela linguagem - Structs
+.play samples/structs.go
+
+* Um tour pela linguagem - Structs - outra sintaxe
+.play samples/structs_short.go
+
+* Um tour pela linguagem - Zero values
+.play samples/zero_values.go
+
+* Um tour pela linguagem - Zero values
+- Bool: *false*
+- Strings: *""*
+- Int, Int64, Floats, etc: *0*
+Isso mesmo, nada de lixo de memória!
+
+* Um tour pela linguagem - Slices
+.play samples/slices.go
+
+* Um tour pela linguagem - Slices usando o comando make
+.play samples/slices_make.go
+
+* Um tour pela linguagem - For usando range
+.play samples/for_range.go
+
+
+* Ok, agora é com vocês!
+- Abram o arquivo exercises/add_slices.go
+- Preencham o corpo da função addSlices
+- Use o seguinte comando para testar o seu código:
+    go run exercises/add_slices.go
+

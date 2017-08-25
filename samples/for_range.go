@@ -4,7 +4,7 @@ import "fmt"
 
 func main() {
 	meuSlice := []string{"um", "slice", "de", "strings"}
-	for _, v := range meuSlice {
-		fmt.Println("leu:", v)
+	for i, v := range meuSlice {
+		fmt.Println("i:", i, "v:", v)
 	}
 }

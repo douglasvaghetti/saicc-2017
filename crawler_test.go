@@ -1,27 +1,14 @@
-package saicc
+package main
 
 import (
-	"fmt"
-	"sync"
 	"testing"
-	"time"
 )
 
-func Test_crawler(t *testing.T) {
-	links := make(chan Link)
-	wg := &sync.WaitGroup{}
-	graph := NewGraph()
-	go simpleCrawler("https://www.ahnegao.com.br/", graph, links, wg)
-	go func() {
-		time.Sleep(time.Second)
-		wg.Wait()
-		close(links)
-	}()
-	for l := range links {
-		fmt.Println(l)
-		go simpleCrawler(l.To, graph, links, wg)
-	}
-
+func Test_StartWebCrawler(t *testing.T) {
+	webGraph := NewGraph()
+	domain := "https://devopers.com.br"
+	StartWebCrawler(domain, webGraph)
+	webGraph.exportDOTFile(domain)
 }
 
 func Test_extractDomain(t *testing.T) {

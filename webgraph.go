@@ -1,6 +1,7 @@
-package saicc
+package main
 
 import (
+	"fmt"
 	"sync"
 )
 
@@ -10,33 +11,54 @@ type WebGraph struct {
 	mutex sync.Mutex
 }
 
+// Link representa um link entre duas paginas, From e To são URLs
 type Link struct {
 	From, To string
 }
 
+// NewGraph inicializa o grafo
 func NewGraph() *WebGraph {
 	var grafo WebGraph
 	grafo.links = make(map[string][]string)
 	return &grafo
 }
 
-// AddLink é uma função que adiciona um link a um WebGraph
-func (w *WebGraph) AddLink(from, to string) {
-	w.mutex.Lock()
-	w.links[from] = append(w.links[from], to)
-	w.mutex.Unlock()
-}
-
-// LinkExists verifica se existe um link
-func (w *WebGraph) LinkExists(from, to string) bool {
+// AddLinkIfNew adiciona um link ao grafo, retorna true se o link for novo
+func (w *WebGraph) AddLinkIfNew(from, to string) bool {
 	w.mutex.Lock()
 	defer w.mutex.Unlock()
+	found := false
 	for i := 0; i < len(w.links[from]); i++ {
 		if to == w.links[from][i] {
-			return true
+			found = true
 		}
 	}
-	return false
+	if !found {
+		w.links[from] = append(w.links[from], to)
+	}
+	return found
+}
+
+func (w *WebGraph) exportDOTFile(domain string) {
+	w.mutex.Lock()
+	defer w.mutex.Unlock()
+
+	domainLen := len(domain)
+
+	fmt.Println("digraph {")
+	for node, links := range w.links {
+		if len(node) > domainLen {
+			// fmt.Println("node = ", node, "limpado:", node[domainLen:])
+			fmt.Printf("\"%s\" -> { \"%s\"", node[domainLen:], links[0][domainLen:])
+			for _, l := range links[1:] {
+				if len(l) > domainLen {
+					fmt.Print(", \"", l[domainLen:], "\"")
+				}
+			}
+			fmt.Println("}\n")
+		}
+	}
+	fmt.Println("}")
 }
 
 func panicif(err error) {

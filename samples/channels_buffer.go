@@ -24,7 +24,7 @@ func consumidor(canal chan int) {
 }
 
 func main() {
-	canal := make(chan int)
+	canal := make(chan int, 10)
 	go produtor(canal)
 	go consumidor(canal)
 	time.Sleep(time.Millisecond)

@@ -16,6 +16,15 @@ https://devopers.com.br/
 - Usando Go - 1 ano e meio
 - Desenvolvimento de jogos - Romance mal resolvido
 
+* Como será o mini curso
+.background imgs/bg.png
+- Apresentação do Go (história, objetivos, principais caracteristicas, etc)
+- Introdução da linguagem
+- Goroutines e channels
+- Um WebCrawler (semi)realista
+- Interfaces, Readers e Writers
+- Servidores Web
+
 
 
 * Uma breve história do Go
@@ -23,8 +32,18 @@ https://devopers.com.br/
 - 2007 - Início do desenvolvimento dentro do Google
 - 2009 - Beta público
 - 2012 - Go 1.0
-- Hoje - Go 1.8
+- Hoje - Go 1.9 (lançou esse mês!)
 
+* Quem usa Go?
+.background imgs/bg.png
+.image imgs/using-go.jpg
+
+* E no Brasil?
+.background imgs/bg.png
+- Globo.com
+- Mercado Livre
+- PagSeguro
+- TOTVS
 
 
 * Uma noção de escala:
@@ -46,7 +65,9 @@ https://devopers.com.br/
 
 * Comparação de desempenho
 .background imgs/bg.png
-- TODO
+- Mais ou menos próximo ao Java
+- Bem mais rápido que Python
+- Mais lento que C/C++
 
 
 
@@ -55,7 +76,10 @@ https://devopers.com.br/
 - *Compilado;*
 - *Fortemente* *tipado;*
 - *Garbage* *collector;*
-- *Multiplataforma.*
+- *Multiplataforma;*
+- *Gopher.*
+.image imgs/gophers.png
+
 
 
 
@@ -140,12 +164,6 @@ Isso mesmo, nada de lixo de memória!
 
 
 
-* O servidor web mais fácil que vocês já viram
-.background imgs/bg.png
-.play samples/webserver.go /START OMIT/,/END OMIT/
-Aperte Run e clique
-.link http://127.0.0.1:50000 Aqui
-
 
 * Goroutines
 .background imgs/bg.png
@@ -162,9 +180,80 @@ Aperte Run e clique
 
 * Channels 
 .background imgs/bg.png
-- Channels são canais seguros de comunicação entre goroutines
-- Quando uma goroutine escreve em um channel, ela para até ele seja lido*
+- Channels são canais de comunicação entre goroutines
+- Quando uma goroutine escreve em um channel, ela só pode escrever de novo quando ele for lido (se for um channel sem buffer)
 
 * Channels
 .background imgs/bg.png
 .play samples/channels.go /START OMIT/,/END OMIT/
+
+* Channels com buffer
+.background imgs/bg.png
+.play samples/channels_buffer.go /START OMIT/,/END OMIT/
+ 
+
+
+* Um WebCrawler (semi)realista
+.background imgs/bg.png
+
+* Arquitetura
+.background imgs/bg.png
+.image imgs/webcrawler.png
+
+
+
+* Continuação do tour
+.background imgs/bg.png
+
+
+* Métodos
+.background imgs/bg.png
+.play samples/methods.go /START OMIT/,/END OMIT/
+
+
+* Interfaces
+.background imgs/bg.png
+- Implementação de interfaces implicita
+- São um conjunto de métodos exigidos
+.play samples/interfaces.go /START OMIT/,/END OMIT/
+
+* Readers e Writers
+.background imgs/bg.png
+- Interfaces para escrita e leitura, *para* *qualquer* *coisa*.
+- Escrevendo em um arquivo? *Readers* *e* *Writers*
+- Respondendo requests web? *Readers* *e* *Writers*
+- Compactadando/descompactando um arquivo? *Readers* *e* *Writers*
+- Criptografando/Descriptografando um arquivo? *Readers* *e* *Writers*
+- Compactando, criptografando e enviando um dado por uma conexão de rede de uma vez só?  *Readers* *e* *Writers*
+
+
+* O servidor web mais fácil que vocês já viram
+.background imgs/bg.png
+.play samples/webserver.go /START OMIT/,/END OMIT/
+Aperte Run e clique
+.link http://127.0.0.1:50000 Aqui
+
+* Exercício 
+.background imgs/bg.png
+- Façam uma página que conta quantas vezes ela já foi visitada
+- Se o visitante for o número 7, peça o número de cartão de crédito dele para que ele possa ganhar um prêmio
+- Ao abrir a página, ele deve exibir algo como:
+    Olá, você é o visitante número 3.
+- Caso seja o visitante número 7, deve exibir:
+    Parabéns!!!
+    Você é o visitante número 7, clique aqui para receber o seu prêmio!
+
+* A ferramenta go
+.background imgs/bg.png
+- `go` `run/install/build`
+- `go` `get`
+- `go` `test`
+- `go` `fmt`
+- `go` `generate`
+- `go` `doc`
+
+* Testes unitários
+TODO/Se sobrar tempo
+
+* Perguntas?
+.background imgs/bg.png

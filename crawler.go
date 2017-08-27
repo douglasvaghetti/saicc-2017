@@ -102,5 +102,4 @@ func StartWebCrawler(domain string, webGraph *WebGraph, t time.Duration) {
 
 	toBeExtracted <- domain
 	time.Sleep(t)
-
 }

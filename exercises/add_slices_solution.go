@@ -11,6 +11,14 @@ func addSlices(a, b []int) []int {
 	return sum
 }
 
+func addSlices2(a, b []int) []int {
+	var sum []int
+	for i := range a {
+		sum = append(sum, a[i]+b[i])
+	}
+	return sum
+}
+
 // END OMIT
 
 func main() {

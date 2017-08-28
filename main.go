@@ -1,6 +1,10 @@
 package main
 
-import "time"
+import (
+	"time"
+
+	_ "golang.org/x/tools/present"
+)
 
 func main() {
 	webGraph := NewGraph()

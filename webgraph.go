@@ -23,7 +23,7 @@ func NewGraph() *WebGraph {
 	return &grafo
 }
 
-// AddLinkIfNew adiciona um link ao grafo, retorna true se o link for novo
+// AddLinkIfNew adiciona um link ao grafo, retorna true se a página alvo for nova
 func (w *WebGraph) AddLinkIfNew(from, to string) bool {
 	w.mutex.Lock()
 	defer w.mutex.Unlock()
@@ -36,10 +36,11 @@ func (w *WebGraph) AddLinkIfNew(from, to string) bool {
 	if !found {
 		w.links[from] = append(w.links[from], to)
 	}
-	return found
+	_, pageSeen := w.links[to]
+	return pageSeen
 }
 
-func (w *WebGraph) exportDOTFile(domain string) {
+func (w *WebGraph) ExportDOTFile(domain string) {
 	w.mutex.Lock()
 	defer w.mutex.Unlock()
 

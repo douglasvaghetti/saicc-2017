@@ -6,6 +6,8 @@ func addSlices(a, b []int) []int {
 	// TODO: criar um slice
 	// TODO: fazer com que cada uma das posições
 	// dele seja igual as somas de a e b nesta posição
+	// os dois slices podem ser de qualquer tamanho, mas o tamanho dos dois é o mesmo
+	// para saber o tamanho dos slices, podem usar a função len, Ex: len(a) retorna o tamanho de a
 	// Exemplo:
 	// a = []int{1,2,3}
 	// b = []int{4,5,6}

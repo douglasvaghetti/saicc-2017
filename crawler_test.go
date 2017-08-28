@@ -1,30 +1,26 @@
 package main
 
-import (
-	"testing"
-)
+import "testing"
 
-func Test_StartWebCrawler(t *testing.T) {
-	webGraph := NewGraph()
-	domain := "https://devopers.com.br"
-	StartWebCrawler(domain, webGraph)
-	webGraph.exportDOTFile(domain)
-}
-
-func Test_extractDomain(t *testing.T) {
-
+func Test_globalize(t *testing.T) {
+	type args struct {
+		baseDomain string
+		from       string
+		to         string
+	}
 	tests := []struct {
 		name string
-		url  string
+		args args
 		want string
 	}{
-		{"basico", "http://devopers.com.br/pasta1", "devopers.com.br"},
-		{"nome", "http://facebook.com/joaopedro.hartmannsalomao", "facebook.com"},
+		{"basico", args{"http://devopers.com.br", "http://devopers.com.br", "http://devopers.com.br/home/"}, "http://devopers.com.br/home/"},
+		{"caminho relativo", args{"http://devopers.com.br", "http://devopers.com.br", "/home/"}, "http://devopers.com.br/home/"},
+		{"outro dominio", args{"http://pudim.com.br", "http://pudim.com.br/asd", "http://devopers.com.br/"}, ""},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := extractDomain(tt.url); got != tt.want {
-				t.Errorf("extractDomain() = %v, want %v", got, tt.want)
+			if got := globalize(tt.args.baseDomain, tt.args.from, tt.args.to); got != tt.want {
+				t.Errorf("globalize() = %v, want %v", got, tt.want)
 			}
 		})
 	}

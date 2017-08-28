@@ -4,9 +4,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"path/filepath"
 	"strings"
-	"time"
 
 	"golang.org/x/net/html"
 )
@@ -24,18 +22,21 @@ func getHref(t html.Token) (bool, string) {
 	return false, ""
 }
 
-// globalize return a url global Ex: http://domini/asd.txt. se a url de outro domínio retorna ""
-func globalize(baseDomain, currentURL, url string) string {
-	if strings.HasPrefix(url, baseDomain) {
-		return url
+// globalize retorna a url global Ex: http://domini/asd.txt. se a url de outro domínio retorna ""
+func globalize(baseDomain, from, to string) string {
+	// se começa com o domínio base, é uma URL válida, apenas retorna ela
+	if strings.HasPrefix(to, baseDomain) {
+		return to
 	}
-	if strings.HasPrefix(url, "http") {
+	// se for uma URL válida, mas não pertence ao domínio, retorna uma string vazia
+	if strings.HasPrefix(to, "http") {
 		return ""
 	}
 
-	query := currentURL[len(baseDomain):] + "/" + url
-	query = filepath.Clean(query) + "/"
-	return baseDomain + query
+	// se nao começa
+	// query := from[len(baseDomain):] + "/" + to
+	// query = filepath.Clean(query) + "/"
+	return baseDomain + to
 }
 
 func extractLinks(from, domain string, body io.ReadCloser, urls chan Link) {
@@ -50,6 +51,7 @@ func extractLinks(from, domain string, body io.ReadCloser, urls chan Link) {
 				ok, to := getHref(token)
 				// fmt.Println("pegou href", to)
 				if ok {
+					fmt.Println("globalizando", domain, from, to)
 					to = globalize(domain, from, to)
 					if to != "" {
 						var l Link
@@ -58,7 +60,7 @@ func extractLinks(from, domain string, body io.ReadCloser, urls chan Link) {
 						urls <- l
 						fmt.Println("jogo", l)
 					} else {
-						fmt.Println("ignorou url", to)
+						fmt.Println("ignorou url:", to, "domain:")
 					}
 				}
 			}
@@ -77,29 +79,25 @@ func extractor(domain string, toBeExtracted chan string, links chan Link) {
 	}
 }
 
-func consumer(toBeExtracted chan string, links chan Link, w *WebGraph) {
-	for l := range links {
-		fmt.Println("leu link", l)
-		isNew := w.AddLinkIfNew(l.From, l.To)
-		if isNew {
-			fmt.Println("era novo")
-			toBeExtracted <- l.To
-		} else {
-			fmt.Println("era repetido")
-		}
-	}
-}
+// func consumer(toBeExtracted chan string, links chan Link, w *WebGraph) {
+// 	for l := range links {
+// 		isNew := w.AddLinkIfNew(l.From, l.To)
+// 		if isNew {
+// 			toBeExtracted <- l.To
+// 		}
+// 	}
+// }
 
-// StartWebCrawler inicia o webcrawler
-func StartWebCrawler(domain string, webGraph *WebGraph, t time.Duration) {
-	links := make(chan Link, 100000)
-	toBeExtracted := make(chan string, 100000)
+// // StartWebCrawler inicia o webcrawler
+// func StartWebCrawler(domain string, webGraph *WebGraph, t time.Duration) {
+// 	links := make(chan Link, 100000)
+// 	toBeExtracted := make(chan string, 100000)
 
-	for i := 0; i < 100; i++ {
-		go consumer(toBeExtracted, links, webGraph)
-		go extractor(domain, toBeExtracted, links)
-	}
+// 	for i := 0; i < 100; i++ {
+// 		go consumer(toBeExtracted, links, webGraph)
+// 		go extractor(domain, toBeExtracted, links)
+// 	}
 
-	toBeExtracted <- domain
-	time.Sleep(t)
-}
+// 	toBeExtracted <- domain
+// 	time.Sleep(t)
+// }

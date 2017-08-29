@@ -9,8 +9,11 @@ douglas@devopers.com.br
 https://devopers.com.br/
 
 * Antes de tudo:
+.background imgs/bg.png
     go get -u github.com/douglasvaghetti/saicc-2017
-    go install 
+    go get golang.org/x/net
+    go get golang.org/x/tools
+    go install golang.org/x/tools/cmd/present
 
 
 * Sobre mim
@@ -61,13 +64,13 @@ https://devopers.com.br/
 
 * Uma noção de escala:
 .background imgs/bg.png
-.image imgs/go-vs-perl.png _ 900
+.html html/trends1.html
 #8h30m
 
 
 * Uma noção de escala:
 .background imgs/bg.png
-.image imgs/go-vs-js.png _ 900
+.html html/trends2.html
 #8h34m
 
 
@@ -245,10 +248,36 @@ Isso mesmo, nada de lixo de memória!
 .background imgs/bg.png
 #10h24m
 
+* O que é um WebCrawler?
+.background imgs/bg.png
+- É uma aplicação que fica baixando páginas da Internet.
+- Normalmente, indexação(pesquisa do Google/Bing)
+- Baixa o HTML de uma página, pega os links, baixa o HTML deles...
+
 * Arquitetura
 .background imgs/bg.png
 .image imgs/webcrawler.png
 #11h0m
+
+* Definindo o tipo Link
+.background imgs/bg.png
+.play sitemap.go /START OMIT/,/END OMIT/
+
+* A goroutine extrator
+.background imgs/bg.png
+.play extrator.go /START OMIT/,/END OMIT/
+
+* A goroutine consumidor
+.background imgs/bg.png
+.play consumidor.go /START OMIT/,/END OMIT/
+
+* Iniciando o WebCrawler
+.background imgs/bg.png
+.play main.go /START OMIT/,/END OMIT/
+
+
+* Demonstração ao vivo!
+.background imgs/bg.png 
 
 
 
@@ -265,10 +294,19 @@ Isso mesmo, nada de lixo de memória!
 
 * Interfaces
 .background imgs/bg.png
-- Implementação de interfaces implicita
+- Implementação de interfaces implícita
 - São um conjunto de métodos exigidos
 .play samples/interfaces.go /START OMIT/,/END OMIT/
 #11h20m
+
+* Exercício
+.background imgs/bg.png
+- Abram o arquivo `exercises/interface.go`
+- Façam com que o tipo circulo implemente a interface geometria
+
+* Solução
+.background imgs/bg.png
+.play exercises/interface_solution.go /START OMIT/,/END OMIT/
 
 * Readers e Writers
 .background imgs/bg.png
@@ -290,6 +328,7 @@ Aperte Run e clique
 
 * Exercício 
 .background imgs/bg.png
+- Abram o arquivo `exercises/visit_count.go`
 - Façam uma página que conta quantas vezes ela já foi visitada
 - Se o visitante for o número 7, peça o número de cartão de crédito dele para que ele possa ganhar um prêmio
 - Ao abrir a página, ele deve exibir algo como:
@@ -297,7 +336,17 @@ Aperte Run e clique
 - Caso seja o visitante número 7, deve exibir:
     Parabéns!!!
     Você é o visitante número 7, clique aqui para receber o seu prêmio!
+- Para executar, usar:
+    go run exercises/visit_count.go
 #11h40m
+
+* Solução
+.background imgs/bg.png
+.play exercises/visit_count_solution.go /START OMIT/,/END OMIT/
+Servidor rodando
+.link http://127.0.0.1:50001 Aqui
+
+
 
 * Considerações finais
 .background imgs/bg.png
@@ -305,6 +354,10 @@ Aperte Run e clique
 - Goroutines/Channels são ótimos
 - Funções com múltiplos retornos!
 - Servidor web sem instalar apache nem outras dependencias
+- Orientação a objetos não é a resposta para tudo.
+- Generics _fazem_ falta
+- Go é mais que uma linguagem, _Go_ _é_ _um_ _ecossistema_
+ 
 
 * Perguntas?
 .background imgs/bg.png
